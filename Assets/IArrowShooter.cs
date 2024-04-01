@@ -1,32 +1,26 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace DefaultNamespace
+public interface IArrowShooter
 {
-    public interface IArrowShooter
-    {
-        bool Charging { get; }
-        bool Shoot { get; }
+    bool Charging { get; }
+    bool Shoot { get; }
         
-    }
+}
 
-    public class KeyboardArrowShooter : IArrowShooter
-    {
-        public bool Charging => Input.GetKey(KeyCode.Space);
-        public bool Shoot => Input.GetKeyUp(KeyCode.Space);
+public class KeyboardArrowShooter : IArrowShooter
+{
+    public bool Charging => Input.GetKey(KeyCode.Space);
+    public bool Shoot => Input.GetKeyUp(KeyCode.Space);
         
-        //
-        //
-        // AsyncReactiveProperty<float> tension = new AsyncReactiveProperty<float>(0);
-        //
-        //
-        // public KeyboardArrowShooter(float tensionIncreasePerSecond)
-        // {
-        //     UniTaskAsyncEnumerable.EveryUpdate()
-        //         .Where(_ => Input.GetKey(KeyCode.Space))
-        //         .Subscribe(_ => { tension.Value = tensionIncreasePerSecond * Time.deltaTime; });
-        // }
-    }
+    //
+    //
+    // AsyncReactiveProperty<float> tension = new AsyncReactiveProperty<float>(0);
+    //
+    //
+    // public KeyboardArrowShooter(float tensionIncreasePerSecond)
+    // {
+    //     UniTaskAsyncEnumerable.EveryUpdate()
+    //         .Where(_ => Input.GetKey(KeyCode.Space))
+    //         .Subscribe(_ => { tension.Value = tensionIncreasePerSecond * Time.deltaTime; });
+    // }
 }

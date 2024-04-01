@@ -3,19 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
-using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ShootArrow : MonoBehaviour
 {
-    public float LaunchForce;
+    public float launchForce;
     public GameObject arrowPrefab;
     GameObject arrow;
     public float tensionIncreasePerSecond;
 
     // IInstantiaterr<GameObject> instantiaterr = new GameObjectInstantiaterr();
-    IInstantiaterr<GameObject> instantiaterr;
-    IArrowShooter _arrowShooter;
+    IInstantiater<GameObject> instantiater;
+    IArrowShooter arrowShooter;
 
     public float minSpeed = 1f;
     public float maxSpeed = 1000f;
@@ -27,20 +27,20 @@ public class ShootArrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instantiaterr = ServiceLocator.GetService<IInstantiaterr<GameObject>>();
-        _arrowShooter = ServiceLocator.GetService<IArrowShooter>();
+        instantiater = ServiceLocator.GetService<IInstantiater<GameObject>>();
+        arrowShooter = ServiceLocator.GetService<IArrowShooter>();
 
         UniTaskAsyncEnumerable.EveryUpdate()
-            .Where(_ => _arrowShooter.Charging)
+            .Where(_ => arrowShooter.Charging)
             .Subscribe(_ =>
             {
-                LaunchForce += tensionIncreasePerSecond * Time.deltaTime;
-                LaunchForce = Mathf.Clamp(LaunchForce, minSpeed, maxSpeed);
+                launchForce += tensionIncreasePerSecond * Time.deltaTime;
+                launchForce = Mathf.Clamp(launchForce, minSpeed, maxSpeed);
             })
             .AddTo(gameObject.GetCancellationTokenOnDestroy());
 
         UniTaskAsyncEnumerable.EveryUpdate()
-            .Where(_ => _arrowShooter.Shoot)
+            .Where(_ => arrowShooter.Shoot)
             .Subscribe(_ => { Shoot(); })
             .AddTo(gameObject.GetCancellationTokenOnDestroy());
     }
@@ -81,8 +81,8 @@ public class ShootArrow : MonoBehaviour
         // float speed = Mathf.Lerp(minSpeed, maxSpeed, Mathf.Clamp01(pressedTime / maxPressedTime));
         // arrow = Instantiate(arrowPrefab, transform.position, transform.rotation);
 
-        arrow = instantiaterr.Instantiate(arrowPrefab, transform.position, transform.rotation);
-        arrow.GetComponent<Rigidbody2D>().AddForce(transform.right * LaunchForce);
-        LaunchForce = minSpeed;
+        arrow = instantiater.Instantiate(arrowPrefab, transform.position, transform.rotation);
+        arrow.GetComponent<Rigidbody2D>().AddForce(transform.right * launchForce);
+        launchForce = minSpeed;
     }
 }

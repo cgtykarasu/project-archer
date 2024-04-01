@@ -1,15 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     void Awake()
     {
-        ServiceLocator.AddService<IInstantiaterr<GameObject>>(new GameObjectInstantiaterr());
+        ServiceLocator.AddService<IInstantiater<GameObject>>(new GameObjectInstantiater());
         // ServiceLocator.AddService<IInstantiaterr<GameObject>>(new GameObjectPooler());
+        ServiceLocator.AddService<IGameObjectPooler<GameObject>>(new GameObjectPooler());
         ServiceLocator.AddService<IArrowShooter>(new KeyboardArrowShooter());
     }
 
