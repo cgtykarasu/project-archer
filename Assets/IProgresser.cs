@@ -1,5 +1,10 @@
-﻿public interface IProgresser
+﻿using System;
+
+namespace DefaultNamespace
 {
-    // IObservable<float> Progress { get; }
-    float Progress { get; }
+    public interface IProgresser
+    {
+        // IObservable<float> Progress { get; }
+        float Progress { get; }
+    }
 }

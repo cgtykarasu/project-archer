@@ -1,41 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public static class ServiceLocator
+namespace DefaultNamespace
 {
-    static Dictionary<Type, object> services = new Dictionary<Type, object>();
-
-    public static void SetService<T>(object service) where T : class
+    public static class ServiceLocator
     {
-        if (!services.ContainsKey(typeof(T)))
-            throw new Exception($"Service not exist: {typeof(T).Name}");
+        static Dictionary<Type, object> services = new Dictionary<Type, object>();
 
-        services[typeof(T)] = service;
-    }
+        public static void SetService<T>(object service) where T : class
+        {
+            if (!services.ContainsKey(typeof(T)))
+                throw new Exception($"Service not exist: {typeof(T).Name}");
 
-    public static void AddService<T>(object service) where T : class
-    {
-        if (services.ContainsKey(typeof(T)))
-            throw new Exception($"Service already registered: {typeof(T).Name}");
+            services[typeof(T)] = service;
+        }
 
-        services.Add(typeof(T), service);
-    }
+        public static void AddService<T>(object service) where T : class
+        {
+            if (services.ContainsKey(typeof(T)))
+                throw new Exception($"Service already registered: {typeof(T).Name}");
 
-    public static void AddService(object service)
-    {
-        var serviceType = service.GetType();
-        if (services.ContainsKey(serviceType))
-            throw new Exception($"Service already registered: {serviceType}");
+            services.Add(typeof(T), service);
+        }
 
-        services.Add(serviceType, service);
-    }
+        public static void AddService(object service)
+        {
+            var serviceType = service.GetType();
+            if (services.ContainsKey(serviceType))
+                throw new Exception($"Service already registered: {serviceType}");
 
-    public static T GetService<T>() where T : class
-    {
-        object instance;
-        if (services.TryGetValue(typeof(T), out instance))
-            return instance as T;
+            services.Add(serviceType, service);
+        }
 
-        throw new KeyNotFoundException($"Service type not found: {typeof(T).Name}");
+        public static T GetService<T>() where T : class
+        {
+            object instance;
+            if (services.TryGetValue(typeof(T), out instance))
+                return instance as T;
+
+            throw new KeyNotFoundException($"Service type not found: {typeof(T).Name}");
+        }
     }
 }

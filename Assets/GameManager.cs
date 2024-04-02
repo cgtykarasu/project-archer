@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,7 +10,6 @@ public class GameManager : MonoBehaviour
     {
         ServiceLocator.AddService<IInstantiater<GameObject>>(new GameObjectInstantiater());
         // ServiceLocator.AddService<IInstantiaterr<GameObject>>(new GameObjectPooler());
-        ServiceLocator.AddService<IGameObjectPooler<GameObject>>(new GameObjectPooler());
         ServiceLocator.AddService<IArrowShooter>(new KeyboardArrowShooter());
     }
 

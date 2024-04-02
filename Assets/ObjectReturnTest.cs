@@ -1,20 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 // public class ObjectReturnTest : MonoBehaviour
 // {
 //     // private ObjectPoolingTest objectPoolingTest;
-//     // IInstantiater<GameObject> _ınstantiater;
-//     IGameObjectPooler<GameObject> gameObjectPooler;
+//     IInstantiaterr<GameObject> instantiaterr;
 //
 //
-//     bool shouldReturn = false;
+//     private bool shouldReturn = false;
 //
 //     void Start()
 //     {
 //         // objectPoolingTest = FindObjectOfType<ObjectPoolingTest>();
-//         gameObjectPooler = ServiceLocator.GetService<IGameObjectPooler<GameObject>>();
+//         instantiaterr = ServiceLocator.GetService<IInstantiaterr<GameObject>>();
 //
 //     }
 //
@@ -26,9 +26,9 @@ using UnityEngine;
 //         //     shouldReturn = false;
 //         // }
 //         
-//         if (gameObjectPooler != null && shouldReturn)
+//         if (instantiaterr != null && shouldReturn)
 //         {
-//             gameObjectPooler.Destroy(gameObject);
+//             instantiaterr.Destroy(gameObject);
 //             shouldReturn = false;
 //         }
 //     }
@@ -41,21 +41,21 @@ using UnityEngine;
 //     void OnBecameInvisible()
 //     {
 //         // objectPoolingTest.ReturnObject(gameObject);
-//         gameObjectPooler.Destroy(gameObject);
+//         instantiaterr.Destroy(gameObject);
 //     }
 // }
 
 public class ObjectReturnTest : MonoBehaviour
 {
     // Define the interface variable to hold the reference to the pooler.
-    private IGameObjectPooler<GameObject> gameObjectPooler;
+    private IInstantiater<GameObject> gameObjectPooler;
     // This flag controls whether the object should be returned to the pool.
     private bool shouldReturn = false;
 
     void Start()
     {
         // Get the GameObjectPooler service at the start.
-        gameObjectPooler = ServiceLocator.GetService<IGameObjectPooler<GameObject>>();
+        gameObjectPooler = ServiceLocator.GetService<IInstantiater<GameObject>>();
         // Ensure the pooler is found. If not, log an error for easier debugging.
         if (gameObjectPooler == null)
         {

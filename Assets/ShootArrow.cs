@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ShootArrow : MonoBehaviour
 {
-    public float launchForce;
+    public float LaunchForce;
     public GameObject arrowPrefab;
     GameObject arrow;
     public float tensionIncreasePerSecond;
@@ -19,11 +19,11 @@ public class ShootArrow : MonoBehaviour
 
     public float minSpeed = 1f;
     public float maxSpeed = 1000f;
-    public float maxPressedTime = 2f;
+    // public float maxPressedTime = 2f;
 
     // float pressedTime = 0f;
     // bool isShooting = false;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +34,8 @@ public class ShootArrow : MonoBehaviour
             .Where(_ => arrowShooter.Charging)
             .Subscribe(_ =>
             {
-                launchForce += tensionIncreasePerSecond * Time.deltaTime;
-                launchForce = Mathf.Clamp(launchForce, minSpeed, maxSpeed);
+                LaunchForce += tensionIncreasePerSecond * Time.deltaTime;
+                LaunchForce = Mathf.Clamp(LaunchForce, minSpeed, maxSpeed);
             })
             .AddTo(gameObject.GetCancellationTokenOnDestroy());
 
@@ -82,7 +82,18 @@ public class ShootArrow : MonoBehaviour
         // arrow = Instantiate(arrowPrefab, transform.position, transform.rotation);
 
         arrow = instantiater.Instantiate(arrowPrefab, transform.position, transform.rotation);
-        arrow.GetComponent<Rigidbody2D>().AddForce(transform.right * launchForce);
-        launchForce = minSpeed;
+
+        // UniTask.DelayFrame(1, PlayerLoopTiming.FixedUpdate).ContinueWith(() =>
+        // {
+        //     arrow.GetComponent<Rigidbody2D>().AddForce(transform.right * LaunchForce);
+        // });
+        
+        arrow.GetComponent<Rigidbody2D>().AddForce(transform.right * LaunchForce);
+        
+        LaunchForce = minSpeed;
+
+        // Vector2 moveDirection = arrow.GetComponent<Rigidbody2D>().velocity;
+        // float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+        // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }

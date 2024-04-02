@@ -463,6 +463,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToSpawn: 5
   prefab: {fileID: 2714436698565171822, guid: 8f8b0a0624964234fb3373dd7a06ac21, type: 3}
+  Xspeed: 2
+  Yspeed: 2
 --- !u!65 &959481446
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -583,6 +585,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToSpawn: 4
   prefab: {fileID: 2714436698565171822, guid: 8f8b0a0624964234fb3373dd7a06ac21, type: 3}
+  Xspeed: 4
+  Yspeed: 4
 --- !u!65 &1076013022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -685,7 +689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1112529891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,7 +748,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1b9e7028bd7bc45a6a291660f2829a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 0, y: 0}
 --- !u!212 &1405935684
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -830,7 +833,6 @@ MonoBehaviour:
   tensionIncreasePerSecond: 500
   minSpeed: 1
   maxSpeed: 1000
-  maxPressedTime: 2
 --- !u!1 &1803871446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,6 +1143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToSpawn: 8
   prefab: {fileID: 2714436698565171822, guid: 8f8b0a0624964234fb3373dd7a06ac21, type: 3}
+  Xspeed: 4.5
+  Yspeed: 5.5
 --- !u!65 &1962932213
 BoxCollider:
   m_ObjectHideFlags: 0
