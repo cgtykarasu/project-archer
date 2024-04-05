@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -10,10 +11,15 @@ public class arrowScript : MonoBehaviour
     Rigidbody2D rb;
 
     bool hasHit = false;
+    public GameObject explosionEffectPrefab;
+    GameObject explosionInstantiate;
+    
+    IInstantiater<GameObject> explosion;
 
     // Start is called before the first frame update
     void Start()
     {
+        explosion = ServiceLocator.GetService<IInstantiater<GameObject>>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -44,8 +50,12 @@ public class arrowScript : MonoBehaviour
         hasHit = true;
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
+        ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(col.gameObject);
         ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(gameObject);
+        // explosionInstantiate = explosion.Instantiate(explosionEffectPrefab, col.transform.position, col.transform.rotation);
+        //Instantiate(explosionEffectPrefab, col.transform.position, Quaternion.identity); // Patlama efektini oynat
         ResetPhysics();
+        CameraShaker.Invoke();
         ScoreManagerTest.Instance.AddScore(1);
 
     }
@@ -61,6 +71,12 @@ public class arrowScript : MonoBehaviour
         hasHit = true;
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
+        // await UniTask.Delay(TimeSpan.FromSeconds(10), ignoreTimeScale: false);
+        // ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(gameObject);
+        // ResetPhysics();
+
+        // Bekleme süresi dolunca, GameObject'i yok edin
+        
         // ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(gameObject);
         // ResetPhysics();
     }
