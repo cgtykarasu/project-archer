@@ -53,7 +53,7 @@ public class arrowScript : MonoBehaviour
         ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(col.gameObject);
         ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(gameObject);
         // explosionInstantiate = explosion.Instantiate(explosionEffectPrefab, col.transform.position, col.transform.rotation);
-        //Instantiate(explosionEffectPrefab, col.transform.position, Quaternion.identity); // Patlama efektini oynat
+        Instantiate(explosionEffectPrefab, col.transform.position, Quaternion.identity); // Patlama efektini oynat
         ResetPhysics();
         CameraShaker.Invoke();
         ScoreManagerTest.Instance.AddScore(1);

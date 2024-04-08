@@ -263,8 +263,8 @@ public interface IInstantiater<T> where T : UnityEngine.Object
 
 public class GameObjectInstantiater : IInstantiater<GameObject>
 {
-    private List<GameObject> activeObjects = new List<GameObject>();
-    private List<GameObject> inactiveObjects = new List<GameObject>();
+    List<GameObject> activeObjects = new List<GameObject>();
+    List<GameObject> inactiveObjects = new List<GameObject>();
 
     public GameObject Instantiate(GameObject prefab, Vector3 position, Quaternion rotation)
     {
