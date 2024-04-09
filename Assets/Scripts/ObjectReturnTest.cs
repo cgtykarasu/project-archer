@@ -83,9 +83,14 @@ public class ObjectReturnTest : MonoBehaviour
     {
         // Automatically return the object to the pool when it's no longer visible.
         // It's a good practice to check if gameObjectPooler is not null to avoid exceptions.
-        if (gameObjectPooler != null)
+        if (gameObjectPooler != null && gameObject.activeSelf)
         {
             gameObjectPooler.Destroy(gameObject);
+            // Debug.Log("OBJECT RETURN TARAFINDAN YOK EDİLDİ");
         }
+        // else
+        // {
+        //     Debug.LogError("GameObjectPooler service not found.");
+        // }
     }
 }

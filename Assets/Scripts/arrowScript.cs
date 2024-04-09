@@ -13,7 +13,7 @@ public class arrowScript : MonoBehaviour
     bool hasHit = false;
     public GameObject explosionEffectPrefab;
     GameObject explosionInstantiate;
-    
+
     IInstantiater<GameObject> explosion;
 
     // Start is called before the first frame update
@@ -46,20 +46,24 @@ public class arrowScript : MonoBehaviour
         //     hasHit = true;
         //     Destroy(gameObject);
         // }
-    
+
         hasHit = true;
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
-        ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(col.gameObject);
-        ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(gameObject);
+        if (col.gameObject.activeSelf)
+        {
+            ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(col.gameObject);
+        }
+
+        // ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(col.gameObject);
+        // ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(gameObject);
         // explosionInstantiate = explosion.Instantiate(explosionEffectPrefab, col.transform.position, col.transform.rotation);
         Instantiate(explosionEffectPrefab, col.transform.position, Quaternion.identity); // Patlama efektini oynat
         ResetPhysics();
         CameraShaker.Invoke();
         ScoreManagerTest.Instance.AddScore(1);
-
     }
-    
+
     void OnCollisionEnter2D(Collision2D col)
     {
         // if(col.gameObject.tag == "Enemy" && !hasHit)
@@ -76,14 +80,17 @@ public class arrowScript : MonoBehaviour
         // ResetPhysics();
 
         // Bekleme süresi dolunca, GameObject'i yok edin
-        
+
         // ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(gameObject);
         // ResetPhysics();
     }
-    
+
     void OnBecameInvisible()
     {
-        ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(gameObject);
+        if (gameObject.activeSelf)
+        {
+            ServiceLocator.GetService<IInstantiater<GameObject>>().Destroy(gameObject);
+        }
     }
 
     async void ResetPhysics()
@@ -92,4 +99,4 @@ public class arrowScript : MonoBehaviour
         rb.isKinematic = false;
         hasHit = false;
     }
-} 
+}

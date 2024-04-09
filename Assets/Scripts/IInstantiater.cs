@@ -299,23 +299,36 @@ public class GameObjectInstantiater : IInstantiater<GameObject>
         return obj;
     }
 
+    // public void Destroy(GameObject gameObject)
+    // {
+    //     if (activeObjects.Contains(gameObject))
+    //     {
+    //         gameObject.SetActive(false);
+    //         inactiveObjects.Add(gameObject);
+    //         // activeObjects.Remove(gameObject);
+    //     }
+    //     // if (activeObjects.Remove(gameObject))
+    //     // {
+    //     //     gameObject.SetActive(false);
+    //     //     inactiveObjects.Add(gameObject);
+    //     // }
+    //     else
+    //     {
+    //         Debug.LogWarning("GameObjectInstantiater: Attempted to destroy an object that is not managed as active.");
+    //         Object.Destroy(gameObject);
+    //     }
+    // }
+    
     public void Destroy(GameObject gameObject)
     {
-        if (activeObjects.Contains(gameObject))
+        if (activeObjects.Remove(gameObject))
         {
             gameObject.SetActive(false);
             inactiveObjects.Add(gameObject);
-            // activeObjects.Remove(gameObject);
         }
-        // if (activeObjects.Remove(gameObject))
-        // {
-        //     gameObject.SetActive(false);
-        //     inactiveObjects.Add(gameObject);
-        // }
         else
         {
             Debug.LogWarning("GameObjectInstantiater: Attempted to destroy an object that is not managed as active.");
-            Object.Destroy(gameObject);
         }
     }
 

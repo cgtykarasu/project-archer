@@ -94,18 +94,18 @@ public class ScoreManagerTest : MonoBehaviour
 
     void OnEnable()
     {
-        ScoreManagerTest.Instance.OnScoreChanged += UpdateScoreDisplay;
+        Instance.OnScoreChanged += UpdateScoreDisplay;
 
-        UpdateScoreDisplay(ScoreManagerTest.Instance.Score);
+        UpdateScoreDisplay(Instance.Score);
     }
 
     void OnDisable()
     {
-        ScoreManagerTest.Instance.OnScoreChanged -= UpdateScoreDisplay;
+        Instance.OnScoreChanged -= UpdateScoreDisplay;
     }
 
     void UpdateScoreDisplay(int newScore)
     {
-        scoreText.text = "Score : " + newScore.ToString();
+        scoreText.text = "Score : " + newScore;
     }
 }
