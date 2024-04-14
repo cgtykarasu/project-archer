@@ -11,12 +11,12 @@ public class ButtonHandler : MonoBehaviour
     {
         // PlayerPrefs.DeleteAll();
         // PlayerPrefs.SetInt("highscore", 0);
-        ScoreManagerTest.Instance.HighScore = 0;
+        ScoreManager.Instance.HighScore = 0;
         UpdateHighScoreText();
     }
     
     void UpdateHighScoreText()
     {
-        highScoreText.text = $"High Score : {ScoreManagerTest.Instance.HighScore}";
+        highScoreText.text = $"High Score : {ScoreManager.Instance.HighScore}";
     }
 }

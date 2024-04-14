@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -3843086502131750407}
   - component: {fileID: -7054578560342007506}
   - component: {fileID: 6516148270489935164}
+  - component: {fileID: 6649788253473261657}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Collectible
@@ -162,7 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215b906ea7bba844b91ca3dfcf9cf47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point: 10
 --- !u!114 &6516148270489935164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,3 +175,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc55451142a6da344b605c8674bb9556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6649788253473261657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714436698565171822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef9effc93d54e259027ace083067bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreValue: 10

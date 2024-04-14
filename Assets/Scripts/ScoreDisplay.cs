@@ -16,14 +16,14 @@ public class ScoreDisplay : MonoBehaviour
 
     void OnEnable()
     {
-        ScoreManagerTest.Instance.OnScoreChanged += UpdateScoreDisplay;
+        ScoreManager.Instance.OnScoreChanged += UpdateScoreDisplay;
         
-        UpdateScoreDisplay(ScoreManagerTest.Instance.Score);
+        UpdateScoreDisplay(ScoreManager.Instance.Score);
     }
 
     void OnDisable()
     {
-        ScoreManagerTest.Instance.OnScoreChanged -= UpdateScoreDisplay;
+        ScoreManager.Instance.OnScoreChanged -= UpdateScoreDisplay;
     }
 
     void UpdateScoreDisplay(int newScore)

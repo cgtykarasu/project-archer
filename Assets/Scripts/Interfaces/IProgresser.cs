@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DefaultNamespace
+﻿namespace Interfaces
 {
     public interface IProgresser
     {

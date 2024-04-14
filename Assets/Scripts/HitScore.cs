@@ -10,7 +10,7 @@ public class HitScore : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            ScoreManagerTest.Instance.AddScore(pointValue); // Score değişkenine puan değerini ekleyin
+            ScoreManager.Instance.AddScore(pointValue); // Score değişkenine puan değerini ekleyin
             Destroy(gameObject); // Nesneyi yok edin
         }
     }

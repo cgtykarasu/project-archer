@@ -1,52 +1,17 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DefaultNamespace;
+using Interfaces;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-// public class SpawnerTest : MonoBehaviour
-// {
-//     [SerializeField] float timeToSpawn = 1f;
-//     float timeSinceLastSpawn = 0f;
-//     // ObjectPoolingTest objectPoolingTest;
-//     [SerializeField] GameObject prefab;
-//     
-//     IInstantiaterr<GameObject> instantiaterForPooling;
-//     
-//     // Start is called before the first frame update
-//     void Start()
-//     {
-//         instantiaterForPooling = ServiceLocator.GetService<IInstantiaterr<GameObject>>();
-//     }
-//
-//     // Update is called once per frame
-//     void Update()
-//     {
-//         timeSinceLastSpawn += Time.deltaTime;
-//         if (timeSinceLastSpawn >= timeToSpawn)
-//         {
-//             GameObject go = instantiaterForPooling.Instantiate(prefab, transform.position, transform.rotation);
-//             
-//             // GameObject go = objectPoolingTest.GetObject(prefab);
-//             // go.transform.position = transform.position;
-//             // go.transform.rotation = transform.rotation;
-//             
-//             go.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(.5f, 3.5f), Random.Range(3f, 5.5f));
-//             timeSinceLastSpawn = 0f;
-//         }
-//     }
-// }
-
-public class SpawnerTest : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
     [SerializeField] float timeToSpawn = 1f;
     float timeSinceLastSpawn = 0f;
     // [SerializeField] GameObject prefab;
     [SerializeField] GameObject[] prefabs;
-    List<GameObject> prefabListTest1;
-    List<GameObject> prefabListTest2;
+    List<GameObject> prefabList01;
+    List<GameObject> prefabList02;
     [SerializeField] float Xspeed = 4.5f;
     [SerializeField] float Yspeed = 5.5f;
 
@@ -57,10 +22,10 @@ public class SpawnerTest : MonoBehaviour
 
     void Start()
     {
-        prefabListTest1 = new List<GameObject>(Enumerable.Repeat(prefabs[0], 2));
-        prefabListTest1.AddRange(Enumerable.Repeat(prefabs[1], 2));
-        ShuffleList(prefabListTest1);
-        prefabListTest2 = new List<GameObject>(prefabListTest1);
+        prefabList01 = new List<GameObject>(Enumerable.Repeat(prefabs[0], 2));
+        prefabList01.AddRange(Enumerable.Repeat(prefabs[1], 2));
+        ShuffleList(prefabList01);
+        prefabList02 = new List<GameObject>(prefabList01);
         
         // screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
 
@@ -124,23 +89,21 @@ public class SpawnerTest : MonoBehaviour
     
     GameObject SelectRandomElement()
     {
-        if (prefabListTest2.Count > 0)
+        if (prefabList02.Count > 0)
         {
-            int randomIndex = Random.Range(0, prefabListTest2.Count);
-            GameObject selectedElement = prefabListTest2[randomIndex];
+            int randomIndex = Random.Range(0, prefabList02.Count);
+            GameObject selectedElement = prefabList02[randomIndex];
             
-            Debug.Log(prefabListTest2.Count + " eleman kaldı, seçilen eleman: " + selectedElement.name);
+            Debug.Log(prefabList02.Count + " eleman kaldı, seçilen eleman: " + selectedElement.name);
             
-            prefabListTest2.RemoveAt(randomIndex);
+            prefabList02.RemoveAt(randomIndex);
 
             return selectedElement;
         }
         else
         {
             Debug.Log("Tüm elemanlar seçildi, yeni bir seçim yapmak için liste yeniden oluşturuluyor.");
-            
-            prefabListTest2 = new List<GameObject>(prefabListTest1);
-            
+            prefabList02 = new List<GameObject>(prefabList01);
             return SelectRandomElement();
         }
     }
