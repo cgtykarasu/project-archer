@@ -54,12 +54,15 @@ namespace Interfaces
             }
         }
 
-        private GameObject GetInactiveObject(GameObject prefab)
+        GameObject GetInactiveObject(GameObject prefab)
         {
             for (int i = 0; i < inactiveObjects.Count; i++)
             {
                 GameObject obj = inactiveObjects[i];
-                if (!obj.activeSelf && obj.GetComponent<PoolableObject>().Prefab == prefab)
+                if (!obj || !obj.activeSelf) continue; // Eğer obje null ya da aktif değilse, döngünün bir sonraki adımına geç.
+        
+                PoolableObject poolableObject = obj.GetComponent<PoolableObject>();
+                if (poolableObject && poolableObject.Prefab == prefab)
                 {
                     inactiveObjects.RemoveAt(i);
                     return obj;

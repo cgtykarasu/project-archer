@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Interfaces;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ShootArrow : MonoBehaviour
 {
@@ -37,8 +36,24 @@ public class ShootArrow : MonoBehaviour
             .AddTo(gameObject.GetCancellationTokenOnDestroy());
     }
     
+    void OnEnable()
+    {
+        EventManager.GameOver += DisableShooting;
+    }
+
+    void OnDisable()
+    {
+        EventManager.GameOver -= DisableShooting;
+    }
+
+    void DisableShooting()
+    {
+        enabled = false; // Bu bileşeni devre dışı bırakarak ok atmayı durdur
+    }
+    
     void Shoot()
     {
+        EventManager.TriggerArrowShot();
         arrow = instantiater.Instantiate(arrowPrefab, transform.position, transform.rotation);
         arrow.GetComponent<Rigidbody2D>().AddForce(transform.right * launchForce);
         launchForce = minSpeed;

@@ -5,6 +5,8 @@ public class BarController : MonoBehaviour
     [SerializeField] SpriteRenderer barSprite;
     
     Vector2 startSize;
+    bool gameOver = false; // Oyunun bitip bitmediğini belirten bir bayrak
+
     
     void Start()
     {
@@ -16,16 +18,23 @@ public class BarController : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (gameOver)
         {
-            currentPower += 3;
-            UpdateBar(currentPower, maxPower);
+            return;
         }
-        
-        if (Input.GetKeyUp(KeyCode.Space))
+        else
         {
-            currentPower = 0;
-            UpdateBar(currentPower, maxPower);
+            if (Input.GetKey(KeyCode.Space))
+            {
+                currentPower += 3;
+                UpdateBar(currentPower, maxPower);
+            }
+        
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                currentPower = 0;
+                UpdateBar(currentPower, maxPower);
+            }
         }
     }
     
@@ -43,7 +52,14 @@ public class BarController : MonoBehaviour
         }
         else if (currentValue >= maxValue)
         {
-            currentValue = maxValue;
+            // currentValue = maxValue;
+            return; // Do not allow the bar to exceed the maximum value
         }
+    }
+    
+    // Oyunun bitip bitmediğini belirlemek için bir metot
+    public void SetGameOver(bool isGameOver)
+    {
+        gameOver = isGameOver;
     }
 }

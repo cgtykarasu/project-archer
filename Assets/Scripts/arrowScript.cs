@@ -12,7 +12,6 @@ public class ArrowScript : MonoBehaviour
 
     IInstantiater<GameObject> explosion;
 
-    // Start is called before the first frame update
     void Start()
     {
         explosion = ServiceLocator.GetService<IInstantiater<GameObject>>();

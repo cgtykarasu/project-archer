@@ -61,23 +61,28 @@ public class Spawner : MonoBehaviour
             // GameObject go = gameObjectPooler.Instantiate(prefabListTest1[Random.Range(0, prefabListTest1.Count)], pos, Quaternion.identity);
             GameObject go = gameObjectPooler.Instantiate(SelectRandomElement(), pos, Quaternion.identity);
 
-            
-            // Optional: Check if the spawned object has a Rigidbody2D to prevent errors.
-            Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
-            if (rb != null)
+            if (go != null)
             {
-                // Randomly set the velocity of the Rigidbody2D.
-                // rb.velocity = new Vector2(Xspeed, Yspeed);
-                rb.AddForce(Physics2D.gravity * Random.Range(-.01f, -1.1f), ForceMode2D.Impulse);
-                rb.velocity = new Vector2(Random.Range(-Xspeed, Xspeed), Random.Range(Yspeed * .70f, Yspeed));
-            }
-            else
-            {
-                Debug.LogWarning("Spawned object does not have a Rigidbody2D component.");
-            }
+                // Optional: Check if the spawned object has a Rigidbody2D to prevent errors.
+                Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    // Randomly set the velocity of the Rigidbody2D.
+                    // rb.velocity = new Vector2(Xspeed, Yspeed);
+                    rb.AddForce(Physics2D.gravity * Random.Range(-.01f, -1.1f), ForceMode2D.Impulse);
+                    rb.velocity = new Vector2(Random.Range(-Xspeed, Xspeed), Random.Range(Yspeed * .70f, Yspeed));
+                }
+                else
+                {
+                    Debug.LogWarning("Spawned object does not have a Rigidbody2D component.");
+                }
 
-            // Reset the spawn timer.
-            timeSinceLastSpawn = 0f;
+                // Reset the spawn timer.
+                timeSinceLastSpawn = 0f;
+            }
+            
+            
+
         }
     }
 
@@ -94,7 +99,7 @@ public class Spawner : MonoBehaviour
             int randomIndex = Random.Range(0, prefabList02.Count);
             GameObject selectedElement = prefabList02[randomIndex];
             
-            Debug.Log(prefabList02.Count + " eleman kaldı, seçilen eleman: " + selectedElement.name);
+            // Debug.Log(prefabList02.Count + " eleman kaldı, seçilen eleman: " + selectedElement.name);
             
             prefabList02.RemoveAt(randomIndex);
 
@@ -102,7 +107,7 @@ public class Spawner : MonoBehaviour
         }
         else
         {
-            Debug.Log("Tüm elemanlar seçildi, yeni bir seçim yapmak için liste yeniden oluşturuluyor.");
+            // Debug.Log("Tüm elemanlar seçildi, yeni bir seçim yapmak için liste yeniden oluşturuluyor.");
             prefabList02 = new List<GameObject>(prefabList01);
             return SelectRandomElement();
         }
