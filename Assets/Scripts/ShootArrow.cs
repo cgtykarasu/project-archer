@@ -27,6 +27,7 @@ public class ShootArrow : MonoBehaviour
             {
                 launchForce += tensionIncreasePerSecond * Time.deltaTime;
                 launchForce = Mathf.Clamp(launchForce, minSpeed, maxSpeed);
+                arrowPrefab.active = true;
             })
             .AddTo(gameObject.GetCancellationTokenOnDestroy());
 

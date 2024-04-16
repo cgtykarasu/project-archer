@@ -13,11 +13,11 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             animator.SetTrigger("fire");
         }
-        else
+        else if (Input.GetKeyUp(KeyCode.Space))
         {
             animator.ResetTrigger("fire");
         }
