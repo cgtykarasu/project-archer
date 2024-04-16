@@ -16,7 +16,6 @@ public class ArrowScript : MonoBehaviour
     {
         explosion = ServiceLocator.GetService<IInstantiater<GameObject>>();
         rb = GetComponent<Rigidbody2D>();
-        rb.isKinematic = true;
     }
 
     // Update is called once per frame
