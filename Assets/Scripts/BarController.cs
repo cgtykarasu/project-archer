@@ -14,7 +14,7 @@ public class BarController : MonoBehaviour
     }
     
     int currentPower = 0;
-    int maxPower = 1000;
+    int maxPower = 1200;
     
     void Update()
     {

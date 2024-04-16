@@ -11,6 +11,7 @@ public class ShootArrow : MonoBehaviour
     public float tensionIncreasePerSecond;
     
     [SerializeField] Transform atmaNoktasi; // Atma noktası olarak kullanılacak Transform objesi
+    public Transform hedef; // Okun yöneleceği hedef obje
 
 
     IInstantiater<GameObject> instantiater;
@@ -56,21 +57,23 @@ public class ShootArrow : MonoBehaviour
     
     void Shoot()
     {
-        // EventManager.TriggerArrowShot();
-        // arrow = instantiater.Instantiate(arrowPrefab, transform.position, transform.rotation);
+        EventManager.TriggerArrowShot();
+        arrow = instantiater.Instantiate(arrowPrefab, transform.position, transform.rotation);
+        Vector2 hedefYonu = ((Vector2)hedef.position - (Vector2)atmaNoktasi.position).normalized; // Hedefe doğru yönelme vektörü
         // arrow.GetComponent<Rigidbody2D>().AddForce(transform.right * launchForce);
-        // launchForce = minSpeed;
+        arrow.GetComponent<Rigidbody2D>().AddForce(hedefYonu * launchForce, ForceMode2D.Impulse); // Oku hedefe doğru fırlat
+        launchForce = minSpeed;
         
-        // Atılacak okun pozisyonunu ve rotasyonunu belirle (atma noktasında)
-        Vector3 atmaPozisyonu = atmaNoktasi.position;
-        Quaternion atmaRotasyonu = atmaNoktasi.rotation;
-
-        // Oku Instantiate et ve atma noktasında oluştur
-        GameObject ok = Instantiate(arrowPrefab, atmaPozisyonu, atmaRotasyonu);
-
-        // Okun Rigidbody2D bileşenine kuvvet uygula (atılacak yönü belirler)
-        // Rigidbody2D okRigidbody = ok.GetComponent<Rigidbody2D>();
-        // okRigidbody.AddForce(atmaNoktasi.right * launchForce, ForceMode2D.Impulse);
-        ok.GetComponent<Rigidbody2D>().AddForce(Vector2.right * launchForce, ForceMode2D.Impulse);
+        // // Atılacak okun pozisyonunu ve rotasyonunu belirle (atma noktasında)
+        // Vector3 atmaPozisyonu = atmaNoktasi.position;
+        // Quaternion atmaRotasyonu = atmaNoktasi.rotation;
+        //
+        // // Oku Instantiate et ve atma noktasında oluştur
+        // GameObject ok = Instantiate(arrowPrefab, atmaPozisyonu, atmaRotasyonu);
+        //
+        // // Okun Rigidbody2D bileşenine kuvvet uygula (atılacak yönü belirler)
+        // // Rigidbody2D okRigidbody = ok.GetComponent<Rigidbody2D>();
+        // // okRigidbody.AddForce(atmaNoktasi.right * launchForce, ForceMode2D.Impulse);
+        // ok.GetComponent<Rigidbody2D>().AddForce(Vector2.right * launchForce, ForceMode2D.Impulse);
     }
 }
