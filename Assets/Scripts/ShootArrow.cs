@@ -20,6 +20,9 @@ public class ShootArrow : MonoBehaviour
     public float minSpeed = 1f;
     public float maxSpeed = 1000f;
     
+    public AudioSource arrowSound;
+    
+    
     void Start()
     {
         instantiater = ServiceLocator.GetService<IInstantiater<GameObject>>();
@@ -59,6 +62,7 @@ public class ShootArrow : MonoBehaviour
     {
         EventManager.TriggerArrowShot();
         arrow = instantiater.Instantiate(arrowPrefab, transform.position, transform.rotation);
+        arrowSound.Play();
         Vector2 hedefYonu = ((Vector2)hedef.position - (Vector2)atmaNoktasi.position).normalized; // Hedefe doğru yönelme vektörü
         // arrow.GetComponent<Rigidbody2D>().AddForce(transform.right * launchForce);
         arrow.GetComponent<Rigidbody2D>().AddForce(hedefYonu * launchForce, ForceMode2D.Impulse); // Oku hedefe doğru fırlat

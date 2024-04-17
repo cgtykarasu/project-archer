@@ -7,6 +7,8 @@ public class BowScript : MonoBehaviour
     
     public float minYPosition = -3f; // En düşük y eksen değeri
     public float maxYPosition = 3f; // En yüksek y eksen değeri
+    
+    public RectTransform rectTransform;
 
     void OnEnable()
     {
@@ -63,13 +65,22 @@ public class BowScript : MonoBehaviour
         // Mouse pozisyonunu kullanarak yeni y ekseni pozisyonunu hesapla
         float newYPosition = Mathf.Clamp(mousePos.y, minYPosition, maxYPosition);
     
-        // Yeni y ekseni pozisyonunu objeye uygula
-        transform.position = new Vector3(transform.position.x, -newYPosition, transform.position.z);
-        Vector2 bowPos = new Vector2(transform.position.x, transform.position.y);
-        direction = bowPos - mousePos;
+        if (RectTransformUtility.RectangleContainsScreenPoint(rectTransform, mousePos))
+        {
+            // Yeni y ekseni pozisyonunu objeye uygula
+            transform.position = new Vector3(transform.position.x, -newYPosition, transform.position.z);
+            Vector2 bowPos = new Vector2(transform.position.x, transform.position.y);
+            direction = bowPos - mousePos;
         
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        float clampAngle = Mathf.Clamp(angle, -25, 80);
-        transform.rotation = Quaternion.AngleAxis(clampAngle, Vector3.forward);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            float clampAngle = Mathf.Clamp(angle, -25, 80);
+            transform.rotation = Quaternion.AngleAxis(clampAngle, Vector3.forward);
+        }
+        else
+        {
+            return;
+        }
+        
+
     }
 }

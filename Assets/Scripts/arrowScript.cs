@@ -11,7 +11,7 @@ public class ArrowScript : MonoBehaviour
     GameObject explosionInstantiate;
 
     IInstantiater<GameObject> explosion;
-
+    
     void Start()
     {
         explosion = ServiceLocator.GetService<IInstantiater<GameObject>>();

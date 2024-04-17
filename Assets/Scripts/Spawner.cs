@@ -24,6 +24,7 @@ public class Spawner : MonoBehaviour
     {
         prefabList01 = new List<GameObject>(Enumerable.Repeat(prefabs[0], 2));
         prefabList01.AddRange(Enumerable.Repeat(prefabs[1], 2));
+
         ShuffleList(prefabList01);
         prefabList02 = new List<GameObject>(prefabList01);
         
